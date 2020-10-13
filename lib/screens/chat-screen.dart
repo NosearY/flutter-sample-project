@@ -8,8 +8,27 @@ class ChartScreen extends StatefulWidget {
   _ChartScreenState createState() => _ChartScreenState();
 }
 
+class CounterDisplay extends StatelessWidget {
+  CounterDisplay({this.count});
+
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('$count');
+  }
+}
+
 class _ChartScreenState extends State<ChartScreen> {
   final _textController = TextEditingController();
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      this._counter++;
+    });
+    print('counter is: ${this._counter}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +38,7 @@ class _ChartScreenState extends State<ChartScreen> {
         leading: IconButton(
           icon: Icon(Icons.menu),
           tooltip: 'Navigation menu',
-          onPressed: null,
+          onPressed: _incrementCounter,
         ),
         actions: <Widget>[
           IconButton(
@@ -29,22 +48,28 @@ class _ChartScreenState extends State<ChartScreen> {
           ),
         ],
       ),
-      body: _buildTextComposer(),
+      body: _buildTextComposer(
+        CounterDisplay(
+          count: _counter,
+        ),
+      ),
     );
   }
 
-  Widget _buildTextComposer() {
+  Widget _buildTextComposer(Widget counter) {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).accentColor),
       child: Column(
         children: [
-          Expanded(
+          Flexible(
             child: Container(
                 child: GestureDetector(
-              onTap: () => {
-                print('tapped'),
-              },
+              onTap: _incrementCounter,
             )),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
+            child: counter,
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
