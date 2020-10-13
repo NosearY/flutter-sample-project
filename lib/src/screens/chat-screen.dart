@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-
-const APP_NAME = 'Start up name generator';
+import 'package:startup_namer/src/constants/app.constants.dart';
 
 class ChartScreen extends StatefulWidget {
   @override
   _ChartScreenState createState() => _ChartScreenState();
 }
 
+@immutable
 class CounterDisplay extends StatelessWidget {
-  CounterDisplay({this.count});
+  const CounterDisplay(this.count);
 
   final int count;
 
@@ -20,27 +19,27 @@ class CounterDisplay extends StatelessWidget {
 }
 
 class _ChartScreenState extends State<ChartScreen> {
-  final _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-      this._counter++;
+      _counter++;
     });
-    print('counter is: ${this._counter}');
+    print('counter is: $_counter');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FriendlyChat'),
+        title: const Text(APP_NAME),
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           tooltip: 'Navigation menu',
           onPressed: _incrementCounter,
         ),
-        actions: <Widget>[
+        actions: const <Widget>[
           IconButton(
             icon: Icon(Icons.search),
             tooltip: 'Search',
@@ -50,7 +49,7 @@ class _ChartScreenState extends State<ChartScreen> {
       ),
       body: _buildTextComposer(
         CounterDisplay(
-          count: _counter,
+          _counter,
         ),
       ),
     );
@@ -60,7 +59,7 @@ class _ChartScreenState extends State<ChartScreen> {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).accentColor),
       child: Column(
-        children: [
+        children: <Widget>[
           Flexible(
             child: Container(
                 child: GestureDetector(
@@ -68,12 +67,12 @@ class _ChartScreenState extends State<ChartScreen> {
             )),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
+            margin: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
             child: counter,
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
+            margin: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
+            padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
             decoration: BoxDecoration(
               border: Border(
                   top: BorderSide(
@@ -86,13 +85,13 @@ class _ChartScreenState extends State<ChartScreen> {
                   child: TextField(
                     controller: _textController,
                     onSubmitted: _handleSubmitted,
-                    decoration: InputDecoration.collapsed(
+                    decoration: const InputDecoration.collapsed(
                       hintText: 'Send a message',
                     ),
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: IconButton(
                       icon: const Icon(Icons.send),
                       onPressed: () => _handleSubmitted(_textController.text),
@@ -107,47 +106,5 @@ class _ChartScreenState extends State<ChartScreen> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
-  }
-}
-
-class RandomWords extends StatefulWidget {
-  @override
-  _RandomWordsState createState() => _RandomWordsState();
-}
-
-class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _biggerFont = TextStyle(fontSize: 18.0);
-
-  @override
-  Widget build(BuildContext context) {
-    // return Text(wordPair.asPascalCase);
-    return Scaffold(
-      appBar: AppBar(title: Text(APP_NAME)),
-      body: _buildSuggestions(),
-    );
-  }
-
-  Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          if (i.isOdd) return Divider();
-
-          final index = i ~/ 2;
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_suggestions[index]);
-        });
-  }
-
-  Widget _buildRow(WordPair wordPair) {
-    return ListTile(
-      title: Text(
-        wordPair.asPascalCase,
-        style: _biggerFont,
-      ),
-    );
   }
 }

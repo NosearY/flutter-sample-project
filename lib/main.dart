@@ -3,11 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:startup_namer/screens/chat-screen.dart';
+import 'package:startup_namer/src/constants/app.constants.dart';
+import 'package:startup_namer/src/screens/chat-screen.dart';
 
-void main() => runApp(FriendlyChatApp());
-
-const APP_NAME = 'Start up name generator';
+void main() => runApp(const FriendlyChatApp());
 
 class FriendlyChatApp extends StatelessWidget {
   const FriendlyChatApp({
