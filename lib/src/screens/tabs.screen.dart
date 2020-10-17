@@ -54,48 +54,50 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: _getTabBarItems(),
-        backgroundColor: Colors.black,
+    return SafeArea(
+      child: CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: _getTabBarItems(),
+          backgroundColor: Colors.black,
+        ),
+        tabBuilder: (BuildContext context, int index) {
+          switch (index) {
+            case 0:
+              return CupertinoTabView(
+                navigatorKey: offeringNavKey,
+                builder: (BuildContext context) => OfferingScreen(),
+              );
+              break;
+            case 1:
+              return CupertinoTabView(
+                navigatorKey: transactionTabNavKey,
+                builder: (BuildContext context) => TransactionScreen(),
+              );
+              break;
+            case 2:
+              return CupertinoTabView(
+                navigatorKey: informationTabNavKey,
+                builder: (BuildContext context) => InformationScreen(),
+              );
+              break;
+            case 3:
+              return CupertinoTabView(
+                navigatorKey: circlesTabNavKey,
+                builder: (BuildContext context) => CirclesScreen(),
+              );
+              break;
+            case 4:
+              return CupertinoTabView(
+                navigatorKey: profileTabNavKey,
+                builder: (BuildContext context) => ProfileScreen(),
+              );
+              break;
+            default:
+              throw 'Unknown tab index';
+              break;
+          }
+        },
       ),
-      tabBuilder: (BuildContext context, int index) {
-        switch (index) {
-          case 0:
-            return CupertinoTabView(
-              navigatorKey: offeringNavKey,
-              builder: (BuildContext context) => OfferingScreen(),
-            );
-            break;
-          case 1:
-            return CupertinoTabView(
-              navigatorKey: transactionTabNavKey,
-              builder: (BuildContext context) => TransactionScreen(),
-            );
-            break;
-          case 2:
-            return CupertinoTabView(
-              navigatorKey: informationTabNavKey,
-              builder: (BuildContext context) => InformationScreen(),
-            );
-            break;
-          case 3:
-            return CupertinoTabView(
-              navigatorKey: circlesTabNavKey,
-              builder: (BuildContext context) => CirclesScreen(),
-            );
-            break;
-          case 4:
-            return CupertinoTabView(
-              navigatorKey: profileTabNavKey,
-              builder: (BuildContext context) => ProfileScreen(),
-            );
-            break;
-          default:
-            throw 'Unknown tab index';
-            break;
-        }
-      },
     );
   }
 }
