@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:startup_namer/generated/l10n.dart';
 
 class OfferingScreen extends StatelessWidget {
   @override
@@ -10,10 +11,10 @@ class OfferingScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 5.0),
-        child: const Align(
+        child: Align(
             child: Text(
-          'This is not a text',
-          style: TextStyle(color: Colors.white, fontSize: 20.0),
+          S.of(context).pageHomeWelcomeFullName('John', 'Doe'),
+          style: const TextStyle(color: Colors.white, fontSize: 20.0),
         )),
       ),
     );

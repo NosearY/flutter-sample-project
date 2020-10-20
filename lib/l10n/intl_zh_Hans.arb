@@ -1,0 +1,9 @@
+{
+    "pageHomeWelcomeFullName": "歡迎 {lastName} {firstName}",
+    "@pageHomeWelcomeFullName": {
+        "placeholders": {
+            "firstName": {},
+            "lastName": {}
+        }
+    }
+}

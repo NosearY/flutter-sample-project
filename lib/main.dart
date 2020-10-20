@@ -4,8 +4,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:startup_namer/src/constants/app.constants.dart';
 import 'package:startup_namer/src/screens/tabs.screen.dart';
+
+import 'generated/l10n.dart';
 
 void main() => runApp(const FriendlyChatApp());
 
@@ -19,6 +22,13 @@ class FriendlyChatApp extends StatelessWidget {
     return CupertinoApp(
       title: APP_NAME,
       home: TabScreen(),
+      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
     );
   }
 }

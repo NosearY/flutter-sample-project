@@ -1,0 +1,10 @@
+{
+  "@@last_modified": "2020-10-20T09:48:44.801081",
+  "pageHomeWelcomeFullName": "Welcome {firstName} {lastName}",
+  "@pageHomeWelcomeFullName": {
+    "placeholders": {
+      "firstName": {},
+      "lastName": {}
+    }
+  }
+}
